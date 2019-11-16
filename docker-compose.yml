@@ -1,15 +1,14 @@
 version: '2'
 services:
-  play:
+  job_worker:
     build: .
     environment:
       TZ: Asia/Tokyo
       APP_ENV: docker
     volumes:
-      - .:/root
+      - .:/job_worker
     ports:
       - 9000:9000
-    command: sbt run
     depends_on:
       - mysql
       - redis
