@@ -1,0 +1,26 @@
+version: '2'
+services:
+  play:
+    build: .
+    environment:
+      TZ: Asia/Tokyo
+      APP_ENV: docker
+    volumes:
+      - .:/root
+    ports:
+      - 9000:9000
+    stdin_open: true
+    depends_on:
+      - db
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: root
+      MYSQL_ROOT_PASSWORD: password
+      TZ: Asia/Tokyo
+    ports:
+      - 3306:3306
+  redis:
+    image: redis:5.0
+    ports:
+      - 6380:6379
