@@ -9,9 +9,10 @@ services:
       - .:/root
     ports:
       - 9000:9000
-    stdin_open: true
+    command: sbt run
     depends_on:
-      - db
+      - mysql
+      - redis
   mysql:
     image: mysql:5.7
     environment:
