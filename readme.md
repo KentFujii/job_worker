@@ -7,4 +7,22 @@
 
 ### docker
 
-Run ``docker-compose up
+Run `docker-compose up`
+
+## memo
+
+https://qiita.com/hosopy/items/d2c87b6489991091ddab
+
+https://blog.tiqwab.com/2017/07/31/redis-pubsub.html
+
+https://medium.com/swlh/asynchronous-queueing-in-redis-with-akka-8b707b784bca
+
+https://www.tutorialdocs.com/article/redis-stream-tutorial.html
+
+https://www.sraoss.co.jp/tech-blog/redis/redis-streams/
+
+https://reffect.co.jp/laravel/redis-pub-sub-dont-understand
+
+https://dzone.com/articles/pubsub-redis-and-akka-actors
+
+https://stackoverflow.com/questions/23608377/redis-pubsub-in-play
