@@ -17,6 +17,8 @@ RUN `docker-compose exec job_worker sbt test`
 
 ## memo
 
+`project/` 配下のディレクトリを消さないと次ビルド時が失敗する可能性がある
+
 ### twitter
 
 https://developer.twitter.com/en/application/use-case
