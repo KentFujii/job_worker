@@ -1,5 +1,5 @@
 name := """job_worker"""
-organization := "kent.com"
+organization := "kent"
 
 version := "1.0-SNAPSHOT"
 
@@ -11,7 +11,7 @@ libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
 
 // Adds additional packages into Twirl
-//TwirlKeys.templateImports += "kent.com.controllers._"
+//TwirlKeys.templateImports += "kent.controllers._"
 
 // Adds additional packages into conf/routes
-// play.sbt.routes.RoutesKeys.routesImport += "kent.com.binders._"
+// play.sbt.routes.RoutesKeys.routesImport += "kent.binders._"
