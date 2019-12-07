@@ -7,6 +7,7 @@ services:
       - .:/job_worker
     ports:
       - 9000:9000
+    command: sbt run
     depends_on:
       - mysql
       - redis

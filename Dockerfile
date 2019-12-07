@@ -6,7 +6,10 @@ RUN curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_V
 RUN apt-get update && \
   apt-get install -y sbt && \
   apt-get clean
-ADD . /job_worker
+
 WORKDIR /job_worker
-CMD ["sbt", "run"]
+ADD build.sbt /job_worker/build.sbt
+ADD project /job_worker/project/
+RUN sbt compile
+ADD . /job_worker
 EXPOSE 9000
