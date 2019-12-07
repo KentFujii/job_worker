@@ -8,4 +8,5 @@ RUN apt-get update && \
   apt-get clean
 ADD . /job_worker
 WORKDIR /job_worker
+CMD ["sbt", "run"]
 EXPOSE 9000

@@ -2,10 +2,9 @@ version: '2'
 services:
   job_worker:
     build: .
+    tty: true
     volumes:
       - .:/job_worker
-    command: sbt run
-    tty: true
     ports:
       - 9000:9000
     depends_on:
