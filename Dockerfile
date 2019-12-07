@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:slim
+FROM openjdk:8
 ENV SBT_VERSION 1.3.3
 RUN curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
   dpkg -i sbt-$SBT_VERSION.deb && \
