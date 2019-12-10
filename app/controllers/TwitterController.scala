@@ -8,10 +8,11 @@ import play.api.libs.json._
 @Singleton
 class TwitterController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   def enqueue() = Action { implicit request: Request[AnyContent] =>
-    println(111)
-    println(request.body)
+    // println(111)
+    // curl -X POST -H "Content-Type: application/json" localhos/enqueue -d @sample.json
+    println(request.body.asJson)
     // println(request.body.get("lang"))
-    println(222)
+    // println(222)
     Ok(Json.toJson(Map("status" -> 200)))
   }
 
