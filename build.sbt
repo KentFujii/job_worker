@@ -9,6 +9,7 @@ scalaVersion := "2.13.1"
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
+libraryDependencies += "net.debasishg" %% "redisclient" % "3.20"
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "kent.controllers._"

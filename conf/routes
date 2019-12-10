@@ -1,1 +1,3 @@
 GET /health controllers.HealthController.health()
+
+POST /twitter/enqueue controllers.TwitterController.enqueue()
