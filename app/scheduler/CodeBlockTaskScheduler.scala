@@ -16,8 +16,8 @@ class CodeBlockTask @Inject() (actorSystem: ActorSystem)(implicit executionConte
   actorSystem.scheduler.schedule(initialDelay = 0.seconds, interval = 1.seconds) {
     val r = new RedisClient("redis", 6379)
     val opt = r.blpop(1, "twitter")
-    // https://alvinalexander.com/scala/how-to-define-methods-return-multiple-items-tuples-scala
-    // http://bach.istc.kobe-u.ac.jp/lect/ProLang/org/scala-list.html#sec-9
-    println(opt)
+    val (k, v) = opt.getOrElse((None, None))
+    println(k)
+    println(v)
   }
 }
