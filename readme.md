@@ -35,6 +35,16 @@ https://reffect.co.jp/laravel/redis-pub-sub-dont-understand
 
 https://blog.tiqwab.com/2017/07/31/redis-pubsub.html
 
+### mysql
+
+https://www.playframework.com/documentation/2.7.x/PlaySlick
+
+https://github.com/playframework/play-samples/tree/2.8.x/play-scala-slick-example
+
+https://github.com/playframework/play-samples/tree/2.8.x/play-scala-isolated-slick-example
+
+https://pedrorijo.com/blog/play-slick/
+
 ### other
 
 https://medium.com/swlh/asynchronous-queueing-in-redis-with-akka-8b707b784bca
