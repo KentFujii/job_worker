@@ -17,7 +17,6 @@ class HealthControllerSpec extends PlaySpec with Results {
       contentType(health) mustBe Some("application/json")
       contentAsString(health) must include ("status")
       (responseJson \ "status").as[Int] mustBe (200)
-      println(111)
     }
   }
 }

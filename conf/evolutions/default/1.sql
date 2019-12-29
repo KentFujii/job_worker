@@ -4,3 +4,5 @@ CREATE TABLE `messages` (
   `text` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8;
+
+INSERT INTO `messages` (`text`) VALUES ('sample text!!!');
