@@ -9,25 +9,27 @@ import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.MySQLProfile.api._
 import slick.jdbc.JdbcProfile
+import scala.concurrent.Await
+import scala.concurrent.duration._
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.language.postfixOps
 
+// https://github.com/playframework/play-samples/tree/2.8.x/play-scala-slick-example
+// http://scala-slick.org/doc/3.3.1/
+// https://github.com/underscoreio/essential-slick-code
+// https://www.playframework.com/documentation/ja/2.2.0/ScalaTest
 // class MessageSpec extends PlaySpec with MockitoSugar {
 class MessageSpec extends PlaySpec {
   "Message#list" should {
     val app = new GuiceApplicationBuilder().build
     val dbConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
     val dbConfig = dbConfigProvider.get[JdbcProfile]
-    println(111)
-    println(dbConfig)
-    // def freshTestData = Seq(
-    //   Message("Hello, HAL. Do you read me, HAL?"),
-    //   Message("Affirmative, Dave. I read you."),
-    //   Message("Open the pod bay doors, HAL."),
-    //   Message("I'm sorry, Dave. I'm afraid I can't do that.")
-    // )
-    // println(11111)
-    // val messages = TableQuery[MessageTable]
-    // messages ++= freshTestData
-    // val halSays = messages.filter(_.text === "HAL")
-    // println(halSays)
+    val db = dbConfig.db
+    val messages = TableQuery[MessageTable]
+    println(messages.schema.createStatements.mkString)
+    val sampleText = messages.filter(_.text === "sample text!!!")
+    println(sampleText.result.statements.mkString)
+    def exec[T](program: DBIO[T]): T = Await.result(db.run(program), 2 seconds)
+    exec(sampleText.result).foreach { println }
   }
 }
