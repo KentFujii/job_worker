@@ -31,5 +31,14 @@ class MessageSpec extends PlaySpec {
     println(sampleText.result.statements.mkString)
     def exec[T](program: DBIO[T]): T = Await.result(db.run(program), 2 seconds)
     exec(sampleText.result).foreach { println }
+    val freshMoreTestData = Seq(
+      ("Hello, HAL. Do you read me, HAL?"),
+      ("Affirmative, Dave. I read you."),
+      ("Open the pod bay doors, HAL."),
+      ("I'm sorry, Dave. I'm afraid I can't do that.")
+    )
+    val moreMessages = messages.map(m => (m.text)) ++= freshTestData
+    exec(moreMessages)
+    exec(sampleText.result).foreach { println }
   }
 }
