@@ -17,6 +17,12 @@ import play.api.test.Helpers._
 class MessageSpec extends PlaySpec {
   "Message#list" should {
     "Access real database" in {
+      // https://www.playframework.com/documentation/ja/2.4.x/ScalaTestingWithScalaTest
+      // http://www.scalatest.org/user_guide/testing_with_mock_objects
+      // TODO DatabaseConfigProviderをmockする
+      val databaseConfigProvider = mock[DatabaseConfigProvider]
+      val repository = new MessageRepository(databaseConfigProvider)
+
       // val app = new GuiceApplicationBuilder().build
       // val dbConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
       // val dbConfig = dbConfigProvider.get[JdbcProfile]
