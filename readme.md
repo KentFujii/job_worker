@@ -47,6 +47,15 @@ https://pedrorijo.com/blog/play-slick/
 
 https://www.playframework.com/documentation/ja/2.4.x/ScalaTestingWithScalaTest#%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AE%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88
 
+https://github.com/playframework/play-samples/tree/2.8.x/play-scala-slick-example
+
+http://scala-slick.org/doc/3.3.1/
+
+https://github.com/underscoreio/essential-slick-code
+
+https://www.playframework.com/documentation/ja/2.2.0/ScalaTest
+
+
 ### other
 
 https://medium.com/swlh/asynchronous-queueing-in-redis-with-akka-8b707b784bca
