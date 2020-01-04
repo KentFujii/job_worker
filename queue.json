@@ -1,65 +1,90 @@
 {
-  "created_at": "Sun Dec 08 09:45:37 +0000 2019",
-  "id": 1203611582548168700,
-  "id_str": "1203611582548168705",
-  "text": "そうだ、今日は西荻ブックマークも予約して楽しみにしてたんだ。ざんねん。行けない。久々にロスパペロスの野崎さんに会えると思ったのに。野崎さんの口から和田誠さんのことが聞ける貴重な機会だったのに。",
+  "created_at": "Sat Jan 04 03:32:18 +0000 2020",
+  "id": 1213302104724394000,
+  "id_str": "1213302104724393984",
+  "text": "RT @ototoharu: 2020スタートです。\n振舞い酒&amp;ジュースをご用意して\n皆様のお越しをお待ちしております。\n・青森産にごり酒\n・フランス産赤ワイン\n・青森産100%リンゴジュース\n\nお待ちしております♫\n\nお問い合わせなどはメッセージ又は\nメールにてお願いしており…",
   "truncated": false,
   "entities": {
     "hashtags": [],
     "symbols": [],
-    "user_mentions": [],
+    "user_mentions": [
+      {
+        "screen_name": "ototoharu",
+        "name": "ototoharu; @西荻窪",
+        "id": 3312843145,
+        "id_str": "3312843145",
+        "indices": [
+          3,
+          13
+        ]
+      }
+    ],
     "urls": []
   },
   "metadata": {
     "iso_language_code": "ja",
     "result_type": "recent"
   },
-  "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
   "in_reply_to_status_id": null,
   "in_reply_to_status_id_str": null,
   "in_reply_to_user_id": null,
   "in_reply_to_user_id_str": null,
   "in_reply_to_screen_name": null,
   "user": {
-    "id": 115065721,
-    "id_str": "115065721",
-    "name": "北條一浩",
-    "screen_name": "akaifusen",
-    "location": "東京の西",
-    "description": "ライター、編集者。著書に『フラワーズ』（思潮社）、『わたしのブックストア』（アスペクト文庫）、『本の時間を届けます』（共著、洋泉社）。編集仕事は『冬の本』（夏葉社）『いちべついらい　田村和子さんのこと』（橋口幸子著・夏葉社）など。「週刊エコノミスト」書評およびアートのページ担当。妻と娘と３人暮らし。",
-    "url": null,
+    "id": 1138977284,
+    "id_str": "1138977284",
+    "name": "西荻案内所",
+    "screen_name": "nishiogi_info",
+    "location": "西荻・西荻窪（東京都杉並区）",
+    "description": "西荻窪地域関連情報発信。書籍「西荻にいたピンクの象」発売中／「西荻まち歩きマップ2019」無料配布中／ウェブサイト「西荻窪ノート」管理人／「西荻観光手帖」企画編集／「ニシオギ空想計画」メンバー／プロデュース「西荻ドブエンナーレ」ほか。",
+    "url": "https://t.co/Mauh1Z0jup",
     "entities": {
+      "url": {
+        "urls": [
+          {
+            "url": "https://t.co/Mauh1Z0jup",
+            "expanded_url": "https://nishiogi.in/",
+            "display_url": "nishiogi.in",
+            "indices": [
+              0,
+              23
+            ]
+          }
+        ]
+      },
       "description": {
         "urls": []
       }
     },
     "protected": false,
-    "followers_count": 2412,
-    "friends_count": 875,
-    "listed_count": 126,
-    "created_at": "Wed Feb 17 14:12:25 +0000 2010",
-    "favourites_count": 336,
+    "followers_count": 6797,
+    "friends_count": 902,
+    "listed_count": 190,
+    "created_at": "Fri Feb 01 07:23:20 +0000 2013",
+    "favourites_count": 6561,
     "utc_offset": null,
     "time_zone": null,
     "geo_enabled": false,
     "verified": false,
-    "statuses_count": 27848,
+    "statuses_count": 54830,
     "lang": null,
     "contributors_enabled": false,
     "is_translator": false,
     "is_translation_enabled": false,
-    "profile_background_color": "C0DEED",
-    "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
-    "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
-    "profile_background_tile": true,
-    "profile_image_url": "http://pbs.twimg.com/profile_images/703458183/chn11_rpt1981_redb_sub_500_normal.jpg",
-    "profile_image_url_https": "https://pbs.twimg.com/profile_images/703458183/chn11_rpt1981_redb_sub_500_normal.jpg",
-    "profile_link_color": "0084B4",
-    "profile_sidebar_border_color": "C0DEED",
-    "profile_sidebar_fill_color": "DDEEF6",
-    "profile_text_color": "333333",
-    "profile_use_background_image": true,
-    "has_extended_profile": true,
+    "profile_background_color": "000000",
+    "profile_background_image_url": "http://abs.twimg.com/images/themes/theme11/bg.gif",
+    "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme11/bg.gif",
+    "profile_background_tile": false,
+    "profile_image_url": "http://pbs.twimg.com/profile_images/881883111285374977/FDJm1vBN_normal.jpg",
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/881883111285374977/FDJm1vBN_normal.jpg",
+    "profile_banner_url": "https://pbs.twimg.com/profile_banners/1138977284/1493992781",
+    "profile_link_color": "FF691F",
+    "profile_sidebar_border_color": "000000",
+    "profile_sidebar_fill_color": "000000",
+    "profile_text_color": "000000",
+    "profile_use_background_image": false,
+    "has_extended_profile": false,
     "default_profile": false,
     "default_profile_image": false,
     "following": null,
@@ -71,9 +96,124 @@
   "coordinates": null,
   "place": null,
   "contributors": null,
+  "retweeted_status": {
+    "created_at": "Sat Jan 04 03:31:07 +0000 2020",
+    "id": 1213301805314003000,
+    "id_str": "1213301805314002946",
+    "text": "2020スタートです。\n振舞い酒&amp;ジュースをご用意して\n皆様のお越しをお待ちしております。\n・青森産にごり酒\n・フランス産赤ワイン\n・青森産100%リンゴジュース\n\nお待ちしております♫\n\nお問い合わせなどはメッセージ又は\nメール… https://t.co/XVJYhlyXFG",
+    "truncated": true,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": [
+        {
+          "url": "https://t.co/XVJYhlyXFG",
+          "expanded_url": "https://twitter.com/i/web/status/1213301805314002946",
+          "display_url": "twitter.com/i/web/status/1…",
+          "indices": [
+            121,
+            144
+          ]
+        }
+      ]
+    },
+    "metadata": {
+      "iso_language_code": "ja",
+      "result_type": "recent"
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 3312843145,
+      "id_str": "3312843145",
+      "name": "ototoharu; @西荻窪",
+      "screen_name": "ototoharu",
+      "location": "東京 杉並区西荻北4-5-28 ツチヤコーポ1階 ",
+      "description": "国、時代、ブランド関係なく素敵だと思った古着を中心に雑貨、服飾雑貨を販売。【国内古着の業販卸し】異業種◎少しだけ欲しい方◎\\対応します/西荻窪北口徒歩7分12時ー20時 火休 ototoharu1@gmail.com /姉妹online shop https://t.co/WfdXkEsnfG",
+      "url": "https://t.co/6jBcLwvwOr",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "https://t.co/6jBcLwvwOr",
+              "expanded_url": "http://ototoharu.shopselect.net",
+              "display_url": "ototoharu.shopselect.net",
+              "indices": [
+                0,
+                23
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": [
+            {
+              "url": "https://t.co/WfdXkEsnfG",
+              "expanded_url": "http://haretokeline.theshop.jp",
+              "display_url": "haretokeline.theshop.jp",
+              "indices": [
+                124,
+                147
+              ]
+            }
+          ]
+        }
+      },
+      "protected": false,
+      "followers_count": 624,
+      "friends_count": 527,
+      "listed_count": 27,
+      "created_at": "Tue Aug 11 22:46:31 +0000 2015",
+      "favourites_count": 3232,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": true,
+      "verified": false,
+      "statuses_count": 2570,
+      "lang": null,
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/859809449363607552/agmgeIh7_normal.jpg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/859809449363607552/agmgeIh7_normal.jpg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/3312843145/1514575244",
+      "profile_link_color": "1DA1F2",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "has_extended_profile": false,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": null,
+      "follow_request_sent": null,
+      "notifications": null,
+      "translator_type": "none"
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 2,
+    "favorite_count": 6,
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "ja"
+  },
   "is_quote_status": false,
-  "retweet_count": 0,
-  "favorite_count": 1,
+  "retweet_count": 2,
+  "favorite_count": 0,
   "favorited": false,
   "retweeted": false,
   "lang": "ja"
