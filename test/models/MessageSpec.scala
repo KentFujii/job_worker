@@ -18,11 +18,11 @@ import scala.concurrent.duration._
 class MessageSpec extends PlaySpec with MockitoSugar {
   "Message#list" should {
     "Return messages" in {
-      // https://www.playframework.com/documentation/ja/2.4.x/ScalaTestingWithScalaTest
       // http://www.scalatest.org/user_guide/testing_with_mock_objects
       // https://github.com/playframework/play-samples/tree/2.8.x/play-scala-slick-example
       // https://blog.karumi.com/testing-with-h2-in-play-framework/
       // http://unittesting1.blogspot.com/2015/07/mocking-database-with-slick-in.html
+      // https://www.playframework.com/documentation/2.8.x/ScalaTestingWithScalaTest
       // TODO DatabaseConfigProviderをmockする
       val app = new GuiceApplicationBuilder().build
       val databasebConfigProvider = mock[DatabaseConfigProvider]
