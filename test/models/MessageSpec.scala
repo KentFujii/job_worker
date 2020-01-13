@@ -16,6 +16,7 @@ import scala.concurrent.Await
 import scala.concurrent.duration._
 
 class MessageSpec extends PlaySpec with MockitoSugar {
+// class MessageSpec extends PlaySpec {
   "Message#list" should {
     "Return messages" in {
       // http://www.scalatest.org/user_guide/testing_with_mock_objects
@@ -26,8 +27,9 @@ class MessageSpec extends PlaySpec with MockitoSugar {
       // TODO DatabaseConfigProviderをmockする
       val app = new GuiceApplicationBuilder().build
       val databasebConfigProvider = mock[DatabaseConfigProvider]
-      // val databasebConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
-      // val model = new MessageRepository(databasebConfigProvider)
+      println(databasebConfigProvider)
+      // val cc = app.injector.instanceOf[DatabaseConfigProvider]
+      // val model = new MessageRepository(cc)
       // Await.result(model.create("test message!!"), 2.seconds)
       // val messages = Await.result(model.list(), 2.seconds)
       // println(messages)
