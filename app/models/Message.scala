@@ -12,10 +12,6 @@ case class Message(id: Long = 0L, text: String)
 class MessageRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
   private val db = dbConfigProvider.get[JdbcProfile].db
 
-  // slick.basic.DatabaseConfig$$anon$1@16bd198a
-  // println(dbConfigProvider.get[JdbcProfile])
-  // slick.jdbc.JdbcBackend$DatabaseDef@8ed1742
-  // println(db)
   private class MessageTable(tag: Tag) extends Table[Message](tag, "messages") {
     def id      = column[Long]("id", O.PrimaryKey, O.AutoInc)
     def text  = column[String]("text")
@@ -25,7 +21,6 @@ class MessageRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impl
 
   def list(): Future[Seq[Message]] = {
     val query = messages.result
-    println(db)
     db.run {
       query
     }
