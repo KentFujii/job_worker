@@ -21,7 +21,6 @@ class MessageRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impl
 
   def list(): Future[Seq[Message]] = {
     val query = messages.result
-    println(query)
     db.run {
       query
     }
