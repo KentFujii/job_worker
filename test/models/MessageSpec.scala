@@ -28,8 +28,8 @@ class MessageSpec extends PlaySpec with MockitoSugar {
       val mockDatabaseConfigProvider = mock[DatabaseConfigProvider](RETURNS_MOCKS)
       val mockDatabaseConfig = mock[DatabaseConfig[JdbcProfile]](RETURNS_MOCKS)
       val mockDatabaseDef = mock[DatabaseDef]
-      when(mockDatabaseConfigProvider.get[JdbcProfile]).thenReturn(mockDatabaseConfig)
-      when(mockDatabaseConfig.db).thenReturn(mockDatabaseDef)
+      doReturn(mockDatabaseConfig).when(mockDatabaseConfigProvider).get[JdbcProfile]
+      doReturn(mockDatabaseDef).when(mockDatabaseConfig).db
       verify(mockDatabaseDef).run(any[DBIO[Seq[Message]]])
       val model = new MessageRepository(mockDatabaseConfigProvider)
       model.list()
