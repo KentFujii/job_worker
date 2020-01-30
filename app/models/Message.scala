@@ -26,13 +26,14 @@ class MessageRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impl
     }
   }
 
-  // def create(text: String): Future[Message] = {
-  //   val query = (messages.map(m => (m.text))
-  //     returning messages.map(_.id)
-  //     into ((message, id) => Message(id, message))
-  //   ) += (text)
-  //   db.run {
-  //     query
-  //   }
-  // }
+  def create(text: String): Future[Message] = {
+    val query = (messages.map(m => (m.text))
+      returning messages.map(_.id)
+      into ((message, id) => Message(id, message))
+    ) += (text)
+    println(query.statements.mkString)
+    db.run {
+      query
+    }
+  }
 }
