@@ -21,14 +21,6 @@ class MessageRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impl
 
   def list(): Future[Seq[Message]] = {
     val query = messages.result
-    println(query.getClass)
-    println(query.getClass.getName)
-    println(query.getClass.getSimpleName)
-    println(query.getClass.getCanonicalName)
-    println(query.getClass.getMethods.map(_.getName).mkString(", "))
-    println(query.statements)
-    println(query.statements.getClass)
-    println(query.statements.mkString)
     db.run {
       query
     }
@@ -39,7 +31,6 @@ class MessageRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impl
       returning messages.map(_.id)
       into ((message, id) => Message(id, message))
     ) += (text)
-    println(query.statements.mkString)
     db.run {
       query
     }
