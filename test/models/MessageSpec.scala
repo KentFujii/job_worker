@@ -19,18 +19,15 @@ import slick.jdbc.JdbcProfile
 import slick.dbio.DBIO
 import scala.concurrent.Await
 import scala.concurrent.duration._
+import scala.util.Random
 // import slick.jdbc.H2Profile.api._
 
 class MessageSpec extends PlaySpec with MockitoSugar {
   "Message#list" should {
     "Return messages" in {
-      // https://github.com/underscoreio/essential-slick-code
-      // https://github.com/KentFujii/job_worker/commit/d55fe667c95ff713349b4391eaf920090994de96
-      // https://scala-slick.org/doc/3.1.0/database.html
-      // Error in custom provider, java.lang.RuntimeException: Failed to get driver instance for jdbcUrl=jdbc:h2:mem:play
-      val h2Config: Map[String, Any] = Map(
+      val h2Config: Map[String, String] = Map(
         "slick.dbs.default.profile"     -> "slick.jdbc.H2Profile$",
-        "slick.dbs.default.db.url"      -> "jdbc:h2:mem:list;MODE=MYSQL",
+        "slick.dbs.default.db.url"      -> s"jdbc:h2:mem:${Random.nextInt};MODE=MYSQL",
         "slick.dbs.default.db.user"     -> "root",
         "slick.dbs.default.db.password" -> "password"
       )
@@ -41,17 +38,11 @@ class MessageSpec extends PlaySpec with MockitoSugar {
       Await.result(model.create("test message!!"), 2.seconds)
       val messages = Await.result(model.list(), 2.seconds)
       println(messages)
-      // val db = dbConfig.db
-      // println(db)
     }
   }
 
   "Message#create" should {
     "Return id" in {
-      // https://github.com/underscoreio/essential-slick-code
-      // https://github.com/KentFujii/job_worker/commit/d55fe667c95ff713349b4391eaf920090994de96
-      // https://scala-slick.org/doc/3.1.0/database.html
-      // Error in custom provider, java.lang.RuntimeException: Failed to get driver instance for jdbcUrl=jdbc:h2:mem:play
       val h2Config: Map[String, Any] = Map(
         "slick.dbs.default.profile"     -> "slick.jdbc.H2Profile$",
         "slick.dbs.default.db.url"      -> "jdbc:h2:mem:create;MODE=MYSQL",
