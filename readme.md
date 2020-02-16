@@ -14,3 +14,7 @@ Run `docker-compose up`
 ### test
 
 RUN `docker-compose exec job_worker sbt test`
+
+### memo
+
+https://blog.karumi.com/testing-with-h2-in-play-framework/

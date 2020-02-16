@@ -17,44 +17,59 @@ import slick.jdbc.JdbcBackend.DatabaseDef
 import scala.concurrent.ExecutionContext.Implicits.global
 import slick.jdbc.JdbcProfile
 import slick.dbio.DBIO
+import scala.concurrent.Await
+import scala.concurrent.duration._
+// import slick.jdbc.H2Profile.api._
 
 class MessageSpec extends PlaySpec with MockitoSugar {
   "Message#list" should {
     "Return messages" in {
-      // DatabaseConfigProvider
-      // println(Configuration.reference)
-      // implicit override val app = new GuiceApplicationBuilder()
-      //   .configure(
-      //     Configuration.from(
-      //       Map(
-      //           "slick.dbs.default.profile" -> "slick.jdbc.H2Profile$",
-      //           "slick.dbs.default.db.profile" -> "org.h2.Driver",
-      //           "slick.dbs.default.db.url" -> "jdbc:h2:mem:play",
-      //           "slick.dbs.default.db.user" -> "root",
-      //           "slick.dbs.default.db.password" -> "password"
-      //       )
-      //     )
-      //   )
-      //   .in(Mode.Test)
-      //   .build
-      val app = new GuiceApplicationBuilder().build
+      // https://github.com/underscoreio/essential-slick-code
+      // https://github.com/KentFujii/job_worker/commit/d55fe667c95ff713349b4391eaf920090994de96
+      // https://scala-slick.org/doc/3.1.0/database.html
+      // Error in custom provider, java.lang.RuntimeException: Failed to get driver instance for jdbcUrl=jdbc:h2:mem:play
+      val h2Config: Map[String, Any] = Map(
+        "slick.dbs.default.profile"     -> "slick.jdbc.H2Profile$",
+        "slick.dbs.default.db.url"      -> "jdbc:h2:mem:list;MODE=MYSQL",
+        "slick.dbs.default.db.user"     -> "root",
+        "slick.dbs.default.db.password" -> "password"
+      )
+
+      val app = new GuiceApplicationBuilder().configure(h2Config).build()
       val dbConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
-      val dbConfig = dbConfigProvider.get[JdbcProfile]
-      val db = dbConfig.db
-      println(db)
-      // https://www.playframework.com/documentation/2.8.x/ScalaTestingWithDatabases
-      // https://www.playframework.com/documentation/2.8.x/ScalaTestingWithSpecs2
-      // https://www.playframework.com/documentation/2.8.x/Developing-with-the-H2-Database
-      // https://www.playframework.com/documentation/2.8.x/PlaySlick
-      // https://github.com/playframework/playframework/blob/master/documentation/manual/working/scalaGuide/main/tests/code/tests/guice/ScalaGuiceApplicationBuilderSpec.scala
-      // https://blog.karumi.com/testing-with-h2-in-play-framework/
-      // slick.dbs.test.profile = "slick.jdbc.H2Profile$"
-      // slick.dbs.default.db.profile = "org.h2.Driver"
-      // slick.dbs.default.db.url = "jdbc:h2:mem:play;MODE=MYSQL"
-      // slick.dbs.default.db.user = "root"
-      // slick.dbs.default.db.password = "password"
+      val model = new MessageRepository(dbConfigProvider)
+      Await.result(model.create("test message!!"), 2.seconds)
+      val messages = Await.result(model.list(), 2.seconds)
+      println(messages)
+      // val db = dbConfig.db
+      // println(db)
     }
   }
+
+  "Message#create" should {
+    "Return id" in {
+      // https://github.com/underscoreio/essential-slick-code
+      // https://github.com/KentFujii/job_worker/commit/d55fe667c95ff713349b4391eaf920090994de96
+      // https://scala-slick.org/doc/3.1.0/database.html
+      // Error in custom provider, java.lang.RuntimeException: Failed to get driver instance for jdbcUrl=jdbc:h2:mem:play
+      val h2Config: Map[String, Any] = Map(
+        "slick.dbs.default.profile"     -> "slick.jdbc.H2Profile$",
+        "slick.dbs.default.db.url"      -> "jdbc:h2:mem:create;MODE=MYSQL",
+        "slick.dbs.default.db.user"     -> "root",
+        "slick.dbs.default.db.password" -> "password"
+      )
+
+      val app = new GuiceApplicationBuilder().configure(h2Config).build()
+      val dbConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
+      val model = new MessageRepository(dbConfigProvider)
+      Await.result(model.create("test message!!"), 2.seconds)
+      val messages = Await.result(model.list(), 2.seconds)
+      println(messages)
+      // val db = dbConfig.db
+      // println(db)
+    }
+  }
+
 
   // "Message#list" should {
   //   "Receive mocks" in {
@@ -69,16 +84,16 @@ class MessageSpec extends PlaySpec with MockitoSugar {
   //   }
   // }
 
-  "Message#create" should {
-    "Receive mocks" in {
-      val mockDatabaseConfigProvider = mock[DatabaseConfigProvider](RETURNS_MOCKS)
-      val mockDatabaseConfig = mock[DatabaseConfig[JdbcProfile]](RETURNS_MOCKS)
-      val mockDatabaseDef = mock[DatabaseDef]
-      doReturn(mockDatabaseConfig).when(mockDatabaseConfigProvider).get[JdbcProfile]
-      doReturn(mockDatabaseDef).when(mockDatabaseConfig).db
-      verify(mockDatabaseDef).run(any[DBIO[Seq[Message]]])
-      val model = new MessageRepository(mockDatabaseConfigProvider)
-      model.create("test message!")
-    }
-  }
+  // "Message#create" should {
+  //   "Receive mocks" in {
+  //     val mockDatabaseConfigProvider = mock[DatabaseConfigProvider](RETURNS_MOCKS)
+  //     val mockDatabaseConfig = mock[DatabaseConfig[JdbcProfile]](RETURNS_MOCKS)
+  //     val mockDatabaseDef = mock[DatabaseDef]
+  //     doReturn(mockDatabaseConfig).when(mockDatabaseConfigProvider).get[JdbcProfile]
+  //     doReturn(mockDatabaseDef).when(mockDatabaseConfig).db
+  //     verify(mockDatabaseDef).run(any[DBIO[Seq[Message]]])
+  //     val model = new MessageRepository(mockDatabaseConfigProvider)
+  //     model.create("test message!")
+  //   }
+  // }
 }
