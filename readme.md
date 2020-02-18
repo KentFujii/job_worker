@@ -18,3 +18,5 @@ RUN `docker-compose exec job_worker sbt test`
 ### memo
 
 https://blog.karumi.com/testing-with-h2-in-play-framework/
+
+https://www.playframework.com/documentation/2.8.x/ScalaTestingYourApplication

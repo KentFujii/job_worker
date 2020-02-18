@@ -20,7 +20,7 @@ class TwitterTaskScheduler @Inject() (actorSystem: ActorSystem)(implicit executi
     val r = new RedisClient("redis", 6379)
     val opt = r.blpop(1, "twitter")
     val (k, v) = opt.getOrElse((None, None))
-    println(k)
-    println(v)
+    // println(k)
+    // println(v)
   }
 }
