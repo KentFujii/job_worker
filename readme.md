@@ -20,3 +20,7 @@ RUN `docker-compose exec job_worker sbt test`
 https://blog.karumi.com/testing-with-h2-in-play-framework/
 
 https://www.playframework.com/documentation/2.8.x/ScalaTestingYourApplication
+
+https://github.com/underscoreio/essential-slick-code
+
+https://github.com/bizreach/slick-reference/blob/master/3.x.md

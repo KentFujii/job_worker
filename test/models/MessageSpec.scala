@@ -12,7 +12,7 @@ import scala.util.Random
 
 class MessageSpec extends PlaySpec {
   "Message#create" should {
-    "Return id" in {
+    "create message" in {
       val h2Config: Map[String, String] = Map(
         "slick.dbs.default.profile"     -> "slick.jdbc.H2Profile$",
         "slick.dbs.default.db.url"      -> s"jdbc:h2:mem:${Random.nextInt};MODE=MYSQL",
@@ -28,7 +28,7 @@ class MessageSpec extends PlaySpec {
   }
 
   "Message#list" should {
-    "Return messages" in {
+    "list messages" in {
       val h2Config: Map[String, String] = Map(
         "slick.dbs.default.profile"     -> "slick.jdbc.H2Profile$",
         "slick.dbs.default.db.url"      -> s"jdbc:h2:mem:${Random.nextInt};MODE=MYSQL",
