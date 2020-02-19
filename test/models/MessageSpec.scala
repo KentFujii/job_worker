@@ -9,6 +9,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Await
 import scala.concurrent.duration._
 import scala.util.Random
+import com.redis._
 
 class MessageSpec extends PlaySpec {
   "Message#create" should {
@@ -43,4 +44,12 @@ class MessageSpec extends PlaySpec {
       listed must contain (Message(1, "test message!"))
     }
   }
+
+  "Message#enqueue" should {
+    val r = new RedisClient("redis", 6379)
+    r.rpush("twitter", request.body.asJson.get)
+  }
+
+  // "Message#dequeue" should {
+  // }
 }

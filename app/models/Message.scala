@@ -5,6 +5,7 @@ import scala.concurrent.{ Future, ExecutionContext }
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.MySQLProfile.api._
 import slick.jdbc.JdbcProfile
+import com.redis._
 
 case class Message(id: Long = 0L, text: String)
 
@@ -35,4 +36,12 @@ class MessageRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impl
       query
     }
   }
+
+  def enqueue(text: String): Unit = {
+  }
+  // def enqueue() = Action { implicit request: Request[AnyContent] =>
+  //   val r = new RedisClient("redis", 6379)
+  //   r.rpush("twitter", request.body.asJson.get)
+  //   Ok(Json.toJson(Map("status" -> 200)))
+  // }
 }
