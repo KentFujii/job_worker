@@ -1,3 +1,4 @@
 GET /health controllers.HealthController.health()
 
-POST /message/enqueue controllers.MessageController.enqueue()
+GET /message/summary controllers.MessageController.summary()
+POST /message/register controllers.MessageController.register()
