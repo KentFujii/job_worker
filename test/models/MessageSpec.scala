@@ -8,20 +8,34 @@ import play.api.db.slick.DatabaseConfigProvider
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Await
 import scala.concurrent.duration._
-import scala.util.Random
 import com.redis._
 
-class MessageSpec extends PlaySpec {
+trait MysqlBuilder extends BeforeAndAfterEach { this: Suite =>
+  // https://www.playframework.com/documentation/2.8.x/ScalaTestingWithGuice
+  // val mysqlConfig: Map[String, String] = Map(
+  //   "slick.dbs.default.profile"     -> "slick.jdbc.MySQLProfile$",
+  //   "slick.dbs.default.db.profile" -> "com.mysql.jdbc.Driver",
+  //   "slick.dbs.default.db.url"      -> s"jdbc:mysql://mysql:3306/job_worker?useSSL=false",
+  //   "slick.dbs.default.db.user"     -> "root",
+  //   "slick.dbs.default.db.password" -> "password"
+  // )
+  val app = new GuiceApplicationBuilder().configure(mysqlConfig).build()
+  val dbConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
+
+  override def beforeEach(): Unit = {
+    println(11111111)
+    super.beforeEach()
+  }
+
+  override def afterEach(): Unit = {
+    println(22222222)
+    super.afterEach()
+  }
+}
+
+class MessageSpec extends PlaySpec with MysqlBuilder {
   "Message#create" should {
     "create message" in {
-      val h2Config: Map[String, String] = Map(
-        "slick.dbs.default.profile"     -> "slick.jdbc.H2Profile$",
-        "slick.dbs.default.db.url"      -> s"jdbc:h2:mem:${Random.nextInt};MODE=MYSQL",
-        "slick.dbs.default.db.user"     -> "root",
-        "slick.dbs.default.db.password" -> "password"
-      )
-      val app = new GuiceApplicationBuilder().configure(h2Config).build()
-      val dbConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
       val model = new MessageRepository(dbConfigProvider)
       val created = Await.result(model.create("test message!"), Duration.Inf)
       created must equal (Message(1, "test message!"))
@@ -30,14 +44,6 @@ class MessageSpec extends PlaySpec {
 
   "Message#list" should {
     "list messages" in {
-      val h2Config: Map[String, String] = Map(
-        "slick.dbs.default.profile"     -> "slick.jdbc.H2Profile$",
-        "slick.dbs.default.db.url"      -> s"jdbc:h2:mem:${Random.nextInt};MODE=MYSQL",
-        "slick.dbs.default.db.user"     -> "root",
-        "slick.dbs.default.db.password" -> "password"
-      )
-      val app = new GuiceApplicationBuilder().configure(h2Config).build()
-      val dbConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
       val model = new MessageRepository(dbConfigProvider)
       Await.result(model.create("test message!"), Duration.Inf)
       val listed = Await.result(model.list(), Duration.Inf)

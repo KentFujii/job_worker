@@ -24,3 +24,7 @@ https://www.playframework.com/documentation/2.8.x/ScalaTestingYourApplication
 https://github.com/underscoreio/essential-slick-code
 
 https://github.com/bizreach/slick-reference/blob/master/3.x.md
+
+https://github.com/debasishg/scala-redis/blob/f89a2221bd1b692dac38826fa0dbe5ae6185c30a/src/test/scala/com/redis/api/BaseApiSpec.scala
+
+Physically a Repository needs integrated tests
