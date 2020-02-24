@@ -4,3 +4,6 @@ CREATE TABLE `messages` (
   `text` text NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+# --- !Downs
+DROP TABLE `messages`;
