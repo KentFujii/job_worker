@@ -19,7 +19,7 @@ services:
       MYSQL_DATABASE: job_worker
     entrypoint:
       sh -c "
-        echo 'CREATE DATABASE IF NOT EXISTS firstDB; CREATE DATABASE IF NOT EXISTS secondDB;' > /docker-entrypoint-initdb.d/init.sql;
+        echo 'CREATE DATABASE IF NOT EXISTS job_worker; CREATE DATABASE IF NOT EXISTS job_worker_test;' > /docker-entrypoint-initdb.d/init.sql;
         /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
       "
     ports:
