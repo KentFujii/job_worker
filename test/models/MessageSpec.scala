@@ -9,11 +9,14 @@ import play.api.db.slick.DatabaseConfigProvider
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Await
 import scala.concurrent.duration._
+import sys.process._
 
 trait DatabaseFlusher extends BeforeAndAfterEach { this: Suite =>
   val app = new GuiceApplicationBuilder().build()
   val dbConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
   val db = app.injector.instanceOf[DBApi]
+  val result = "mysql -h mysql -uroot -ppassword -e 'show databases;'".!!
+  println(result)
   override def afterEach(): Unit = {
     db.database("default").withConnection { conn =>
       conn.createStatement().executeUpdate("truncate table messages;")
