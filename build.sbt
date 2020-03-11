@@ -16,4 +16,4 @@ libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % Test
 libraryDependencies += "org.mockito" % "mockito-core" % "3.2.4" % Test
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
 
-javaOptions in Test += "-Dconfig.file=conf/application.test.conf"
+parallelExecution in Test := true
