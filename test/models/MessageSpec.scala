@@ -12,37 +12,89 @@ import scala.concurrent.duration._
 import scala.util.Random
 import sys.process._
 
-trait MySqlHelper extends BeforeAndAfterEach { this: Suite =>
-  val app = new GuiceApplicationBuilder().build()
-  val dbConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
-  val db = app.injector.instanceOf[DBApi]
-  // https://stackoverflow.com/questions/15338315/parallel-test-runner-for-play-framework
-  // https://github.com/KentFujii/job_worker/blob/8acfb01775ac7a266a0242c11bab76551c6b39c4/test/models/MessageSpec.scala
-  val dbName = s"job_worker_test_${Math.abs(Random.nextInt)}"
-  s"mysql -h mysql -uroot -ppassword -e 'create database ${dbName};'".!
-  // override def afterEach(): Unit = {
-  //   db.database("default").withConnection { conn =>
-  //     conn.createStatement().executeUpdate("truncate table messages;")
-  //   }
-  //   super.afterEach()
-  // }
-}
+// trait MysqlHelper extends BeforeAndAfter { this: Suite =>
+//   override def after(): Unit = {
+//     s"mysql -h mysql -uroot -ppassword -e 'drop database ${dbName};'".!
+//   }
+// }
 
-class MessageSpec extends PlaySpec with MySqlHelper {
+// trait MysqlEachHelper extends BeforeAndAfterEach { this: Suite =>
+//   val dbNameList = new ListBuffer[String]
+//   val databaseNameBuilder = new StringBuilder
+//   override def afterEach(): Unit = {
+//     val dbName = s"job_worker_test_${Math.abs(Random.nextInt)}"
+//     println(dbName)
+//     s"mysql -h mysql -uroot -ppassword -e 'create database ${dbName};'".!
+//     val mysqlConfig: Map[String, String] = Map(
+//       "slick.dbs.default.profile"     -> "slick.jdbc.MySQLProfile$",
+//       "slick.dbs.default.db.profile"  -> "com.mysql.jdbc.Driver",
+//       "slick.dbs.default.db.url"      -> s"jdbc:mysql://mysql:3306/${dbName}?useSSL=false",
+//       "slick.dbs.default.db.user"     -> "root",
+//       "slick.dbs.default.db.password" -> "password"
+//     )
+//     val app = new GuiceApplicationBuilder().configure(mysqlConfig).build()
+//     val dbConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
+//     val db = app.injector.instanceOf[DBApi]
+//   }
+//   override def afterEach(): Unit = {
+//     println(dbName)
+//     db.database("default").withConnection { conn =>
+//       conn.createStatement().executeUpdate("truncate table messages;")
+//     }
+//     super.afterEach()
+//   }
+// }
+
+class MessageSpec extends PlaySpec {
+  // afterEach {
+  //   println(111111)
+  //   // db.database("default").withConnection { conn =>
+  //   //   conn.createStatement().executeUpdate("truncate table messages;")
+  //   // }
+  // }
+
   "Message#create" should {
     "create message" in {
-      // val model = new MessageRepository(dbConfigProvider)
-      // val created = Await.result(model.create("test message!"), Duration.Inf)
-      // created must equal (Message(1, "test message!"))
+      val dbName = s"job_worker_test_${Math.abs(Random.nextInt)}"
+      println(dbName)
+      s"mysql -h mysql -uroot -ppassword -e 'create database ${dbName};'".!
+      val mysqlConfig: Map[String, String] = Map(
+        "slick.dbs.default.profile"     -> "slick.jdbc.MySQLProfile$",
+        "slick.dbs.default.db.profile"  -> "com.mysql.jdbc.Driver",
+        "slick.dbs.default.db.url"      -> s"jdbc:mysql://mysql:3306/${dbName}?useSSL=false",
+        "slick.dbs.default.db.user"     -> "root",
+        "slick.dbs.default.db.password" -> "password"
+      )
+      val app = new GuiceApplicationBuilder().configure(mysqlConfig).build()
+      val dbConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
+      val db = app.injector.instanceOf[DBApi]
+      val model = new MessageRepository(dbConfigProvider)
+      val created = Await.result(model.create("test message!"), Duration.Inf)
+      created must equal (Message(1, "test message!"))
+      s"mysql -h mysql -uroot -ppassword -e 'drop database ${dbName};'".!
     }
   }
 
-  // "Message#list" should {
-  //   "list messages" in {
-  //     val model = new MessageRepository(dbConfigProvider)
-  //     Await.result(model.create("test message!"), Duration.Inf)
-  //     val listed = Await.result(model.list(), Duration.Inf)
-  //     listed must contain (Message(1, "test message!"))
-  //   }
-  // }
+  "Message#list" should {
+    "list messages" in {
+      val dbName = s"job_worker_test_${Math.abs(Random.nextInt)}"
+      println(dbName)
+      s"mysql -h mysql -uroot -ppassword -e 'create database ${dbName};'".!
+      val mysqlConfig: Map[String, String] = Map(
+        "slick.dbs.default.profile"     -> "slick.jdbc.MySQLProfile$",
+        "slick.dbs.default.db.profile"  -> "com.mysql.jdbc.Driver",
+        "slick.dbs.default.db.url"      -> s"jdbc:mysql://mysql:3306/${dbName}?useSSL=false",
+        "slick.dbs.default.db.user"     -> "root",
+        "slick.dbs.default.db.password" -> "password"
+      )
+      val app = new GuiceApplicationBuilder().configure(mysqlConfig).build()
+      val dbConfigProvider = app.injector.instanceOf[DatabaseConfigProvider]
+      val db = app.injector.instanceOf[DBApi]
+      val model = new MessageRepository(dbConfigProvider)
+      Await.result(model.create("test message!"), Duration.Inf)
+      val listed = Await.result(model.list(), Duration.Inf)
+      listed must contain (Message(1, "test message!"))
+      s"mysql -h mysql -uroot -ppassword -e 'drop database ${dbName};'".!
+    }
+  }
 }
