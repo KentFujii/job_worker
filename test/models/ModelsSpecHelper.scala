@@ -2,6 +2,7 @@ package models
 
 import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.db.slick.DatabaseConfigProvider
+import play.api.Configuration
 import scala.util.Random
 import sys.process._
 
@@ -22,6 +23,22 @@ trait ModelSpecHelper {
     try {
       testCode(dbConfigProvider)
     }
-    finally s"mysql -h mysql -uroot -ppassword -e 'drop database ${dbName};'".!
+    finally s"mysql -h mysql -uroot -ppassword -e 'drop database ${dbName};'".!!
+  }
+
+  def withRedis(testCode: Configuration => Unit): Unit = {
+    val keyName = s"job_worker_${Math.abs(Random.nextInt)}"
+    val redisConfig: Map[String, Any] = Map(
+      "redis.host" -> "redis",
+      "redis.database" -> 0,
+      "redis.port" -> 6379,
+      "redis.key" -> keyName
+    )
+    val app = new GuiceApplicationBuilder().configure(redisConfig).build()
+    val config = app.injector.instanceOf[Configuration]
+    try {
+      testCode(config)
+    }
+    finally s"redis-cli -h redis -n 0 -p 6379 del ${keyName}".!!
   }
 }

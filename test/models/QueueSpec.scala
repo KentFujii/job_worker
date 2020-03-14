@@ -1,20 +1,22 @@
 package models
 
-import org.scalatest._
 import org.scalatestplus.play._
-import play.api.test._
-import play.api.inject.guice.GuiceApplicationBuilder
 
-class QueueSpec extends PlaySpec {
-  "Queue#enqueue" should {
-    "create message" in {
-      val redisConfig: Map[String, Any] = Map(
-        "redis.host" -> "redis",
-        "redis.port" -> 6379
-      )
-      val app = new GuiceApplicationBuilder().configure(redisConfig).build()
-      val model = new QueueRepository(app.configuration)
+class QueueRepositorySpec extends PlaySpec with ModelSpecHelper {
+  "QueueRepository#enqueue" should {
+    "enqueue value" in withRedis { config =>
+      val model = new QueueRepository(config)
+      val enqueued = model.enqueue("test message!")
+      enqueued must equal(Some(1))
+    }
+  }
+
+  "QueueRepository#dequeue" should {
+    "dequeue value" in withRedis { config =>
+      val model = new QueueRepository(config)
       model.enqueue("test message!")
+      val dequeued = model.dequeue
+      dequeued must equal(Some("test message!"))
     }
   }
 }

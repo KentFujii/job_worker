@@ -10,7 +10,7 @@ class MessageRepositorySpec extends PlaySpec with ModelSpecHelper {
     "create message" in withMysql { dbConfigProvider =>
       val model = new MessageRepository(dbConfigProvider)
       val created = Await.result(model.create("test message!"), Duration.Inf)
-      created must equal (Message(1, "test message!"))
+      created must equal(Message(1, "test message!"))
     }
   }
 
@@ -19,7 +19,7 @@ class MessageRepositorySpec extends PlaySpec with ModelSpecHelper {
       val model = new MessageRepository(dbConfigProvider)
       Await.result(model.create("test message!"), Duration.Inf)
       val listed = Await.result(model.list(), Duration.Inf)
-      listed must contain (Message(1, "test message!"))
+      listed must contain(Message(1, "test message!"))
     }
   }
 }
