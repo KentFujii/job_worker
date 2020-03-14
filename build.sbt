@@ -7,6 +7,8 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.13.1"
 
+scalacOptions += "-Ywarn-unused"
+
 libraryDependencies += guice
 libraryDependencies += "net.debasishg" %% "redisclient" % "3.20"
 libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.41"
