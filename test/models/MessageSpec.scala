@@ -8,18 +8,19 @@ import scala.concurrent.duration._
 class MessageRepositorySpec extends PlaySpec with ModelSpecHelper {
   "MessageRepository#create" should {
     "create message" in withMysql { config =>
-      // val model = new MessageRepository(config)
-      // val created = Await.result(model.create("test message!"), Duration.Inf)
-      // created must equal(Message(1, "test message!"))
+      val model = new MessageRepository(config)
+      val action = model.create("test message!")
+      val created = Await.result(action, Duration.Inf)
+      created must equal(Some(1))
     }
   }
 
-  // "MessageRepository#list" should {
-  //   "list messages" in withMysql { config =>
-  //     val model = new MessageRepository(config)
-  //     Await.result(model.create("test message!"), Duration.Inf)
-  //     val listed = Await.result(model.list(), Duration.Inf)
-  //     listed must contain(Message(1, "test message!"))
-  //   }
-  // }
+  "MessageRepository#list" should {
+    "list messages" in withMysql { config =>
+      val model = new MessageRepository(config)
+      Await.result(model.create("test message!"), Duration.Inf)
+      val listed = Await.result(model.list(), Duration.Inf)
+      listed must contain(Message("test message!", 1))
+    }
+  }
 }
