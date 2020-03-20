@@ -4,7 +4,6 @@ import javax.inject._
 import scala.concurrent.{ Future, ExecutionContext }
 import play.api.Configuration
 import slick.jdbc.MySQLProfile.api._
-import slick.jdbc.JdbcProfile
 
 case class Message(id: Long = 0L, text: String)
 
@@ -37,19 +36,17 @@ class MessageRepository @Inject()(config: Configuration)(implicit ec: ExecutionC
 
   def all(): Future[Seq[Message]] = {
     val query = messages.result
-    db.run {
-      query
-    }
+    db.run(query)
   }
 
-  def create(text: String): Future[Option[Int]] = {
-    val query = messages ++= Seq(Message(0, text))
+  def create(text: String): Future[Int] = {
+    val query = messages.map(_.text) += (text)
     db.run(query)
   }
 
   // https://railsguides.jp/active_record_basics.html#crud-%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E8%AA%AD%E3%81%BF%E6%9B%B8%E3%81%8D
-  def update(text: String): Future[Option[Int]] = {
-    val query = messages ++= Seq(Message(0, text))
+  def update(id: Int, text: String): Future[Int] = {
+    val query = messages.filter(_.id === id.toLong).map(_.text).update(text)
     db.run(query)
   }
 }

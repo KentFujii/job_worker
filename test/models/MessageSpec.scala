@@ -11,7 +11,7 @@ class MessageRepositorySpec extends PlaySpec with ModelSpecHelper {
       val model = new MessageRepository(config)
       val action = model.create("test message!")
       val created = Await.result(action, Duration.Inf)
-      created must equal(Some(1))
+      created must equal(1)
     }
   }
 
