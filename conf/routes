@@ -1,7 +1,7 @@
 GET /health controllers.HealthController.health()
 
 GET /messages controllers.MessageController.index()
-GET /messages/:id controllers.MessageController.show(id: Int)
+GET /messages/:id controllers.MessageController.show(id: Long)
 POST /messages controllers.MessageController.create()
-PUT /messages/:id controllers.MessageController.update(id: Int)
-DELETE /messages/:id controllers.MessageController.destroy(id: Int)
+PUT /messages/:id controllers.MessageController.update(id: Long)
+DELETE /messages/:id controllers.MessageController.destroy(id: Long)
