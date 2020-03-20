@@ -28,6 +28,7 @@ class MessageController @Inject()(repo: MessageRepository, cc: ControllerCompone
     Ok(Json.toJson(Map("status" -> 200)))
   }
 
+  // https://railsguides.jp/active_record_basics.html#crud-%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E8%AA%AD%E3%81%BF%E6%9B%B8%E3%81%8D
   def update(id: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     Ok(Json.toJson(Map("status" -> 200)))
   }
