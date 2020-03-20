@@ -6,7 +6,7 @@ import play.api.Configuration
 import slick.jdbc.MySQLProfile.api._
 import slick.jdbc.JdbcProfile
 
-case class Message(text: String, id: Long = 0L)
+case class Message(id: Long = 0L, text: String)
 
 @Singleton
 class MessageRepository @Inject()(config: Configuration)(implicit ec: ExecutionContext) {
@@ -31,7 +31,7 @@ class MessageRepository @Inject()(config: Configuration)(implicit ec: ExecutionC
   private class MessageTable(tag: Tag) extends Table[Message](tag, "messages") {
     def id   = column[Long]("id", O.PrimaryKey, O.AutoInc)
     def text = column[String]("text")
-    def *    = (text, id).mapTo[Message]
+    def *    = (id, text).mapTo[Message]
   }
   private val messages = TableQuery[MessageTable]
 
@@ -43,7 +43,7 @@ class MessageRepository @Inject()(config: Configuration)(implicit ec: ExecutionC
   }
 
   def create(text: String): Future[Option[Int]] = {
-    val query = messages ++= Seq(Message(text))
+    val query = messages ++= Seq(Message(0, text))
     db.run(query)
   }
 }
