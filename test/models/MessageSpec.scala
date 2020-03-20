@@ -15,12 +15,12 @@ class MessageRepositorySpec extends PlaySpec with ModelSpecHelper {
     }
   }
 
-  "MessageRepository#list" should {
+  "MessageRepository#all" should {
     "list messages" in withMysql { config =>
       val model = new MessageRepository(config)
       Await.result(model.create("test message!"), Duration.Inf)
-      val listed = Await.result(model.list(), Duration.Inf)
-      listed must contain(Message("test message!", 1))
+      val all = Await.result(model.all(), Duration.Inf)
+      all must contain(Message("test message!", 1))
     }
   }
 }

@@ -35,15 +35,15 @@ class MessageRepository @Inject()(config: Configuration)(implicit ec: ExecutionC
   }
   private val messages = TableQuery[MessageTable]
 
-  def create(text: String): Future[Option[Int]] = {
-    val query = messages ++= Seq(Message(text))
-    db.run(query)
-  }
-
-  def list(): Future[Seq[Message]] = {
+  def all(): Future[Seq[Message]] = {
     val query = messages.result
     db.run {
       query
     }
+  }
+
+  def create(text: String): Future[Option[Int]] = {
+    val query = messages ++= Seq(Message(text))
+    db.run(query)
   }
 }
