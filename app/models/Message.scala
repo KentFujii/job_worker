@@ -40,8 +40,8 @@ class MessageRepository @Inject()(config: Configuration)(implicit ec: ExecutionC
     db.run(query)
   }
 
-  def find(id: Long): Future[Seq[Message]] = {
-    val query = messages.filter(_.id === id).result
+  def find(id: Long): Future[Option[Message]] = {
+    val query = messages.filter(_.id === id).result.headOption
     db.run(query)
   }
 
