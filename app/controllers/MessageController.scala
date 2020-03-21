@@ -12,7 +12,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 @Singleton
 class MessageController @Inject()(repo: MessageRepository, cc: ControllerComponents) extends AbstractController(cc) {
   // curl http://localhost:9000/messages
-  // https://www.playframework.com/documentation/2.8.x/ScalaJsonHttp
   def index(): Action[AnyContent] = Action {
     println(Await.result(repo.all(), Duration.Inf))
     Ok(Json.toJson(Map("status" -> 200)))
@@ -20,13 +19,10 @@ class MessageController @Inject()(repo: MessageRepository, cc: ControllerCompone
 
   // curl http://localhost:9000/messages/1
   def show(id: Long): Action[AnyContent] = Action {
-    // println(Await.result(repo.find(id), Duration.Inf).get)
     implicit val messageWrites = Json.writes[Message]
     val message = Await.result(repo.find(id), Duration.Inf).get
     val messageJson: JsValue = Json.toJson(message)
-    println(messageJson)
-    // https://qiita.com/miyatin0212/items/fdfe3c6141323ae281c3
-    Ok(Json.toJson(Map("status" -> 200)))
+    Ok(messageJson)
   }
 
   // curl -X POST -H 'Content-Type:application/json' -d '{"text": "This is a message!!!"}' http://localhost:9000/messages
@@ -49,9 +45,8 @@ class MessageController @Inject()(repo: MessageRepository, cc: ControllerCompone
     Ok(Json.toJson(Map("status" -> 200)))
   }
 
-  // def register() = Action { implicit request: Request[AnyContent] =>
-  //   val r = new RedisClient("redis", 6379)
-  //   r.lpush("twitter", request.body.asJson.get)
+  // curl -X DELETE http://localhost:9000/messages/enqueue
+  // def enqueue(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
   //   Ok(Json.toJson(Map("status" -> 200)))
   // }
 }
