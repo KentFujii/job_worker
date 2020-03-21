@@ -33,9 +33,15 @@ class MessageRepository @Inject()(config: Configuration)(implicit ec: ExecutionC
     def *    = (id, text).mapTo[Message]
   }
   private val messages = TableQuery[MessageTable]
+  // https://railsguides.jp/active_record_basics.html#crud-%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E8%AA%AD%E3%81%BF%E6%9B%B8%E3%81%8D
 
   def all(): Future[Seq[Message]] = {
     val query = messages.result
+    db.run(query)
+  }
+
+  def find(id: Long): Future[Seq[Message]] = {
+    val query = messages.filter(_.id === id).result
     db.run(query)
   }
 
@@ -44,9 +50,13 @@ class MessageRepository @Inject()(config: Configuration)(implicit ec: ExecutionC
     db.run(query)
   }
 
-  // https://railsguides.jp/active_record_basics.html#crud-%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E8%AA%AD%E3%81%BF%E6%9B%B8%E3%81%8D
   def update(id: Long, text: String): Future[Int] = {
     val query = messages.filter(_.id === id).map(_.text).update(text)
+    db.run(query)
+  }
+
+  def destroy(id: Long): Future[Int] = {
+    val query = messages.filter(_.id === id).delete
     db.run(query)
   }
 }

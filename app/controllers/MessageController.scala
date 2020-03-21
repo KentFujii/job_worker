@@ -17,7 +17,9 @@ class MessageController @Inject()(repo: MessageRepository, cc: ControllerCompone
     Ok(Json.toJson(Map("status" -> 200)))
   }
 
+  // curl http://localhost:9000/messages/1
   def show(id: Long): Action[AnyContent] = Action {
+    println(Await.result(repo.find(id), Duration.Inf))
     Ok(Json.toJson(Map("status" -> 200)))
   }
 
@@ -28,18 +30,22 @@ class MessageController @Inject()(repo: MessageRepository, cc: ControllerCompone
     Ok(Json.toJson(Map("status" -> 200)))
   }
 
-  // https://railsguides.jp/active_record_basics.html#crud-%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E8%AA%AD%E3%81%BF%E6%9B%B8%E3%81%8D
+  // curl -X PUT -H 'Content-Type:application/json' -d '{"text": "This is a message???"}' http://localhost:9000/messages/1
   def update(id: Long): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    val text = (request.body.asJson.get \ "text").as[String]
+    repo.update(id, text)
     Ok(Json.toJson(Map("status" -> 200)))
   }
 
+  // curl -X DELETE http://localhost:9000/messages/1
   def destroy(id: Long): Action[AnyContent] = Action {
+    repo.destroy(id)
     Ok(Json.toJson(Map("status" -> 200)))
   }
 
   // def register() = Action { implicit request: Request[AnyContent] =>
   //   val r = new RedisClient("redis", 6379)
-  //   r.rpush("twitter", request.body.asJson.get)
+  //   r.lpush("twitter", request.body.asJson.get)
   //   Ok(Json.toJson(Map("status" -> 200)))
   // }
 }

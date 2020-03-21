@@ -15,7 +15,7 @@ class QueueRepository @Inject()(config: Configuration) {
   private val client = new RedisClient(host, port, database)
 
   def enqueue(text: String): Option[Long] = {
-    client.rpush(key, text)
+    client.lpush(key, text)
   }
 
   def dequeue(): Option[String] = {
