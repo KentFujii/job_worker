@@ -6,21 +6,25 @@ import play.api.libs.json._
 import models._
 import scala.concurrent.Await
 import scala.concurrent.duration._
-import scala.util.{ Try, Success, Failure }
-import scala.concurrent.ExecutionContext.Implicits.global
 
 @Singleton
-class MessageController @Inject()(repo: MessageRepository, cc: ControllerComponents) extends AbstractController(cc) {
+class MessageController @Inject()(
+  messageRepo: MessageRepository,
+  queueRepo: QueueRepository,
+  cc: ControllerComponents
+) extends AbstractController(cc) {
+  implicit val messageWrites = Json.writes[Message]
+
   // curl http://localhost:9000/messages
   def index(): Action[AnyContent] = Action {
-    println(Await.result(repo.all(), Duration.Inf))
-    Ok(Json.toJson(Map("status" -> 200)))
+    val messages = Await.result(messageRepo.all(), Duration.Inf)
+    val messagesJson: JsValue = Json.toJson(messages)
+    Ok(messagesJson)
   }
 
   // curl http://localhost:9000/messages/1
   def show(id: Long): Action[AnyContent] = Action {
-    implicit val messageWrites = Json.writes[Message]
-    val message = Await.result(repo.find(id), Duration.Inf).get
+    val message = Await.result(messageRepo.find(id), Duration.Inf).get
     val messageJson: JsValue = Json.toJson(message)
     Ok(messageJson)
   }
@@ -28,25 +32,27 @@ class MessageController @Inject()(repo: MessageRepository, cc: ControllerCompone
   // curl -X POST -H 'Content-Type:application/json' -d '{"text": "This is a message!!!"}' http://localhost:9000/messages
   def create(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val text = (request.body.asJson.get \ "text").as[String]
-    repo.create(text)
+    messageRepo.create(text)
     Ok(Json.toJson(Map("status" -> 200)))
   }
 
   // curl -X PUT -H 'Content-Type:application/json' -d '{"text": "This is a message???"}' http://localhost:9000/messages/1
   def update(id: Long): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val text = (request.body.asJson.get \ "text").as[String]
-    repo.update(id, text)
+    messageRepo.update(id, text)
     Ok(Json.toJson(Map("status" -> 200)))
   }
 
   // curl -X DELETE http://localhost:9000/messages/1
   def destroy(id: Long): Action[AnyContent] = Action {
-    repo.destroy(id)
+    messageRepo.destroy(id)
     Ok(Json.toJson(Map("status" -> 200)))
   }
 
   // curl -X DELETE http://localhost:9000/messages/enqueue
-  // def enqueue(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-  //   Ok(Json.toJson(Map("status" -> 200)))
-  // }
+  def enqueue(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    val text = (request.body.asJson.get \ "text").as[String]
+    queueRepo.enqueue(text)
+    Ok(Json.toJson(Map("status" -> 200)))
+  }
 }
