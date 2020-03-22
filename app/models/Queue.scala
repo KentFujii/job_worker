@@ -14,6 +14,10 @@ class QueueRepository @Inject()(config: Configuration) {
   private val key = config.get[String]("redisclient.key")
   private val client = new RedisClient(host, port, database)
 
+  def count(): Option[Long] = {
+    client.llen(key)
+  }
+
   def enqueue(text: String): Option[Long] = {
     client.lpush(key, text)
   }
