@@ -12,6 +12,7 @@ services:
       - mysql
       - redis
   mysql:
+    # https://gist.github.com/ugdark/ec614b23a8b08c8a5a5d6a57cc4619d5
     image: mysql:5.7
     environment:
       TZ: Asia/Tokyo
