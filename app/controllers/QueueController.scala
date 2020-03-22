@@ -11,7 +11,7 @@ class QueueController @Inject()(
   queueRepo: QueueRepository,
   cc: ControllerComponents
 ) extends AbstractController(cc) {
-  // curl -X POST -H 'Content-Type:application/json' -d '{"text": "This is a message!!!"}' http://localhost:9000/queues
+  // curl -X POST -H 'Content-Type:application/json' -d '{"text": "This is a message!!!"}' http://localhost:9000/queues/enqueue
   def enqueue(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val text = (request.body.asJson.get \ "text").as[String]
     queueRepo.enqueue(text)
