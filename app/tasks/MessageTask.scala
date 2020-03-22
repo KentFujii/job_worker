@@ -9,8 +9,6 @@ import play.api.inject._
 import akka.actor.ActorSystem
 import scala.concurrent.ExecutionContext
 import scala.concurrent.duration._
-import play.Logger
-import com.redis._
 import models._
 
 class MessageTask extends SimpleModule(bind[MessageTaskScheduler].toSelf.eagerly())
