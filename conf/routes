@@ -5,4 +5,5 @@ GET /messages/:id controllers.MessageController.show(id: Long)
 POST /messages controllers.MessageController.create()
 PUT /messages/:id controllers.MessageController.update(id: Long)
 DELETE /messages/:id controllers.MessageController.destroy(id: Long)
-POST /messages/enqueue controllers.MessageController.enqueue()
+
+POST /queues controllers.QueueController.enqueue()

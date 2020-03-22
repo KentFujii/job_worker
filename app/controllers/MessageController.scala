@@ -48,11 +48,4 @@ class MessageController @Inject()(
     messageRepo.destroy(id)
     Ok(Json.toJson(Map("status" -> 200)))
   }
-
-  // curl -X DELETE http://localhost:9000/messages/enqueue
-  def enqueue(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    val text = (request.body.asJson.get \ "text").as[String]
-    queueRepo.enqueue(text)
-    Ok(Json.toJson(Map("status" -> 200)))
-  }
 }
