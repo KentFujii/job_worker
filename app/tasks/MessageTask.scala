@@ -1,7 +1,5 @@
 package tasks
 
-// import javax.inject.Inject
-
 import javax.inject._
 import play.api.inject.SimpleModule
 import play.api.inject._
