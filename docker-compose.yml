@@ -12,7 +12,9 @@ services:
       - mysql
       - redis
   mysql:
-    image: mysql:5.7
+    build:
+      context: .
+      dockerfile: DockerfileMysql
     environment:
       TZ: Asia/Tokyo
       MYSQL_ROOT_PASSWORD: password

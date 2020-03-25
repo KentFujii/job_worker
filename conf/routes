@@ -1,4 +1,10 @@
 GET /health controllers.HealthController.health()
 
-GET /message/summary controllers.MessageController.summary()
-POST /message/register controllers.MessageController.register()
+GET /messages controllers.MessageController.index()
+GET /messages/:id controllers.MessageController.show(id: Long)
+POST /messages controllers.MessageController.create()
+PUT /messages/:id controllers.MessageController.update(id: Long)
+DELETE /messages/:id controllers.MessageController.destroy(id: Long)
+
+GET /queues/count controllers.QueueController.count()
+POST /queues/enqueue controllers.QueueController.enqueue()

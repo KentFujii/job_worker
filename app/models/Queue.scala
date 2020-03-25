@@ -8,17 +8,21 @@ case class Queue(text: String)
 
 @Singleton
 class QueueRepository @Inject()(config: Configuration) {
-  private val host = config.get[String]("redis.host")
-  private val port = config.get[Int]("redis.port")
+  private val host = config.get[String]("redisclient.host")
+  private val database = config.get[Int]("redisclient.database")
+  private val port = config.get[Int]("redisclient.port")
+  private val key = config.get[String]("redisclient.key")
+  private val client = new RedisClient(host, port, database)
 
-  def enqueue(text: String): Unit = {
-    val r = new RedisClient(host, port)
-    r.rpush("twitter", text)
+  def count(): Option[Long] = {
+    client.llen(key)
   }
 
-  def dequeue(text: String): Unit = {
-    val r = new RedisClient("redis", 6379)
-    val opt = r.blpop(1, "twitter")
-    val (k, v) = opt.getOrElse((None, None))
+  def enqueue(text: String): Option[Long] = {
+    client.lpush(key, text)
+  }
+
+  def dequeue(): Option[String] = {
+    client.rpop(key)
   }
 }
