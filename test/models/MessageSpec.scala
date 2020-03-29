@@ -20,7 +20,7 @@ class MessageRepositorySpec extends PlaySpec with ModelSpecHelper {
       val model = new MessageRepository(config)
       Await.result(model.create("test message!"), Duration.Inf)
       val all = Await.result(model.all(), Duration.Inf)
-      all must contain(Message(1L, "test message!"))
+      all.head.text must equal("test message!")
     }
   }
 }

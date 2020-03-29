@@ -2,10 +2,11 @@ package models
 
 import javax.inject._
 import scala.concurrent.{ Future, ExecutionContext }
+import java.sql.Timestamp
 import play.api.Configuration
 import slick.jdbc.MySQLProfile.api._
 
-case class Message(id: Long = 0L, text: String)
+case class Message(id: Long = 0L, text: String, createdAt: Timestamp, updatedAt: Timestamp)
 
 @Singleton
 class MessageRepository @Inject()(config: Configuration)(implicit ec: ExecutionContext) {
@@ -30,9 +31,16 @@ class MessageRepository @Inject()(config: Configuration)(implicit ec: ExecutionC
   private class MessageTable(tag: Tag) extends Table[Message](tag, "messages") {
     def id   = column[Long]("id", O.PrimaryKey, O.AutoInc)
     def text = column[String]("text")
-    def *    = (id, text).mapTo[Message]
+    def createdAt = column[Timestamp]("created_at")
+    def updatedAt = column[Timestamp]("updated_at")
+    def *    = (id, text, createdAt, updatedAt).mapTo[Message]
   }
   private val messages = TableQuery[MessageTable]
+  // スキーマ
+  // https://gist.github.com/ugdark/ec614b23a8b08c8a5a5d6a57cc4619d5
+  // コード
+  // https://github.com/underscoreio/essential-slick-code
+  // デザイン
   // https://railsguides.jp/active_record_basics.html#crud-%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E8%AA%AD%E3%81%BF%E6%9B%B8%E3%81%8D
 
   def all(): Future[Seq[Message]] = {
